@@ -1,38 +1,25 @@
-.App {
-  text-align: center;
+
+@font-face {
+  font-family: "Sketch-3D";
+  src: local(Sketch-3D), url("./Fonts/Sketch-3D.woff")
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: "Sketch-3D";
+  background-image: url("https://i.pinimg.com/originals/80/4f/9d/804f9d9f98aec636235b4de0668b4b62.jpg");
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flex-div {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.header-div {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  color: rgb(255, 122, 122);
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header-h1 {
+  background-color: lightslategray;
 }
