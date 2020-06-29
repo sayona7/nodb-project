@@ -6,6 +6,7 @@ import DogInfo from "./Components/DogInfo";
 import './App.css';
 import axios from "axios";
 import "./Fonts/Sketch-3D.woff"
+import MyFavs from './Components/MyFavs';
 
 
 class App extends Component {
@@ -13,11 +14,28 @@ class App extends Component {
     super(props);
 
     this.state = {
-      dogImgUrl: "",
-      breeds: []
+      dogInfo: []
     }
 
+    this.passDogInfo = this.passDogInfo.bind(this);
 
+  }
+
+  componentDidMount() {
+    axios.get("/api/fav-breeds")
+    .then(res => {
+      console.log(res);
+      this.setState({dogInfo: res.data})
+    })
+    .catch(err => console.log(err));
+  }
+
+  passDogInfo(dog) {
+    axios.post("/api/fav-breeds", {dog})
+    .then( res => {
+      this.setState({dogInfo: res.data})
+    })
+    .catch(err => console.log(err));
   }
 
 
@@ -25,9 +43,12 @@ class App extends Component {
     return ( 
       <div>
         <Header />
-        <SearchBar />
-        <View />
-        <DogInfo />
+        <SearchBar 
+        passInfo={this.passDogInfo}/>
+        {/* <MyFavs 
+        dogInfo={this.state.dogInfo}/> */}
+        {/* <View /> */}
+        {/* <DogInfo /> */}
       </div>
      );
   }

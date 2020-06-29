@@ -5,17 +5,15 @@ module.exports = {
     getDogImg: (req, res) => {
 
         let dogLink = "";
+        // console.log(req.params);
 
-        axios.get(`https://dog.ceo/api/breed/${req.params.id}/images/random`)
+        axios.get(`https://api.thedogapi.com/v1/images/search?include_breed=1&breed_id=${req.params.id}`)
         .then(response => {
-            dogLink += response.data.message;
+            // console.log(response.data[0].url);
+            dogLink += response.data[0].url;
             res.status(200).send(dogLink);
-            console.log(dogLink);
-            console.log("getting dog imgs");
+            // console.log(dogLink);
         })
         .catch(err => res.status(500).send(err));
     }
 }
-
-
-// axios.get(`https://dog.ceo/api/breed/${breedName}/images/random`)
