@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Header from "./Components/Header"
-import View from "./Components/View";
+// import View from "./Components/View";
 import SearchBar from './Components/SearchBar';
-import DogInfo from "./Components/DogInfo";
+// import DogInfo from "./Components/DogInfo";
 import './App.css';
 import axios from "axios";
 import "./Fonts/Sketch-3D.woff"
-import MyFavs from './Components/MyFavs';
+// import MyFavs from './Components/MyFavs';
 
 
 class App extends Component {
@@ -24,7 +24,6 @@ class App extends Component {
   componentDidMount() {
     axios.get("/api/fav-breeds")
     .then(res => {
-      console.log(res);
       this.setState({dogInfo: res.data})
     })
     .catch(err => console.log(err));

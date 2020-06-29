@@ -11,10 +11,12 @@ class SearchBar extends Component {
         breeds: [],
         selectedBreed: "",
         dogLink: "",
-        favDogs: []
+        favDogs: [],
+        currentDogData: []
      }
 
      this.handleAdd = this.handleAdd.bind(this);
+     this.removeFav = this.removeFav.bind(this);
     }
 
     componentDidMount() {
@@ -27,7 +29,7 @@ class SearchBar extends Component {
             this.setState({
                 breeds: res.data[0]
             })
-            console.log(this.state.breeds)
+            // console.log(this.state.breeds)
         }).catch(error => {
             console.log(error);
         });
@@ -43,13 +45,36 @@ class SearchBar extends Component {
         .catch(error => {
             console.log(error);
         })
-        console.log(this.state.dogLink)
+        // console.log(this.state.dogLink)
     }
+
+    getDogData(dogObj) {
+        console.log(dogObj);
+        let currentData = dogObj;
+        this.setState({
+            currentDogData: currentData
+        })
+    
+    }
+
 
     onChangeHandler(e) {
         this.setState({selectedBreed: e.target.value});
-        this.getDogImg(e.target.options.selectedIndex);
-        console.log(e.target.options.selectedIndex);
+        let currentDog = e.target.value;
+        console.log(currentDog);
+        let storage = [];
+
+        for (let i = 0; i < this.state.breeds.length; i++) {
+            if (currentDog === this.state.breeds[i].name) {
+                this.getDogImg(this.state.breeds[i].id);
+                for (let key in this.state.breeds[i]) {
+                storage.push(this.state.breeds[i][key]);
+                }
+                storage.splice(0, 3);
+                this.getDogData(storage);
+            }
+        }
+        
     }
 
     handleAdd() {
@@ -57,16 +82,27 @@ class SearchBar extends Component {
         newFavorites.push(
                 {
                     name: this.state.selectedBreed,
-                    imgURL: this.state.dogLink
+                    imgURL: this.state.dogLink,
+                    dogData: this.state.currentDogData
                 }  
         )
 
         this.setState({favDogs: newFavorites});
     }
 
+    removeFav(dogName) {
+        let updatedFavs = this.state.favDogs;
+        
+        updatedFavs.pop();
+
+        this.setState({favDogs: updatedFavs})
+        // console.log("function fired")
+    }
+
 
     render() { 
         // console.log(this.state.selectedBreed);
+        console.log(this.state.favDogs);
         return ( 
             <div>
                 <div className="flex-div">
@@ -88,12 +124,14 @@ class SearchBar extends Component {
                     <View 
                     selectedBreed={this.state.selectedBreed}
                     imgURL={this.state.dogLink}
+                    dogData={this.state.currentDogData}
                     />
                     < MyFavs 
                     // dogInfo={this.props.dogInfo}
                     // refreshDog={this.getDogBreeds}
                     // refreshImg={this.getDogImg}
                     favDogs={this.state.favDogs}
+                    removeFav={this.removeFav}
                     />
                 </div>
             </div>

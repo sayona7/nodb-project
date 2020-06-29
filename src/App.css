@@ -47,6 +47,7 @@ body {
 	font-size: 40px;
 	text-align: center;
 	background-color: cadetblue;
+	margin: 5px;
 }
 
 .fav-div {
@@ -60,11 +61,30 @@ body {
 
 .fav-dog {
 	margin: 20px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 }
 
 .fav-dog-img {
 	width: 500px;
 	height: 388px;
+	display: flex;
+	justify-content: center;
+}
+
+.table {
+	display: flex;
+	flex-wrap: wrap;
+	background-color: darkgrey;
+	font-size: 25px;
+	text-align: center;
+	width: 500px;
+}
+
+.fav-tbody {
+	text-align: center;
 }
 
 .img-btn {
